@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #FAF7F2;
+    color: #1A1818;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-royal {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom Luxury Tokens Matching UMADHVAYA Brand */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #C5A059 0%, #F3E7BE 50%, #9E7A31 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.maroon-gradient-text {
+  background: linear-gradient(135deg, #7B112B 0%, #670A1E 50%, #4A0614 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-royal-maroon {
+  background: linear-gradient(135deg, #7B112B 0%, #670A1E 100%);
+}
+
+.gold-button {
+  background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #B38E38 100%);
+  color: #1A0D14;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.35);
+}
+
+.gold-button:hover {
+  background: linear-gradient(135deg, #B38E38 0%, #C5A059 50%, #D4AF37 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.5);
+}
+
+.maroon-button {
+  background: linear-gradient(135deg, #7B112B 0%, #670A1E 100%);
+  color: #FAF7F2;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(103, 10, 30, 0.35);
+}
+
+.maroon-button:hover {
+  background: linear-gradient(135deg, #670A1E 0%, #4A0614 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(103, 10, 30, 0.5);
+}
+
+.saree-hover-zoom {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .saree-hover-zoom {
+  transform: scale(1.06);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9E7A31;
+}
