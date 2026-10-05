@@ -2,9 +2,23 @@ import React, { useState } from 'react';
 import { HER_DAY_TIMELINE } from '../data/mockData';
 import { Clock, CheckCircle2, Coffee, Briefcase, Users, Wine } from 'lucide-react';
 
+import morningImg from '../assets/stories/corporate.jpg';
+import keynoteImg from '../assets/stories/entrepreneur.jpg';
+import coffeeImg from '../assets/stories/timeline_530pm.jpg';
+import ritualImg from '../assets/stories/mayura_day.jpg';
+import dinnerImg from '../assets/stories/mayura_night.jpg';
+
 export const HerDayTimeline: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const currentSlot = HER_DAY_TIMELINE[activeStep] || HER_DAY_TIMELINE[0];
+
+  const timelineImages = [
+    morningImg,
+    keynoteImg,
+    coffeeImg,
+    ritualImg,
+    dinnerImg,
+  ];
 
   const getIcon = (idx: number) => {
     switch (idx) {
@@ -18,7 +32,7 @@ export const HerDayTimeline: React.FC = () => {
   };
 
   return (
-    <section id="her-day-section" className="py-20 sm:py-28 bg-[#FAF7F2] border-b border-[#C5A059]/20 relative overflow-hidden">
+    <section id="her-day-section" className="pt-10 pb-16 sm:pt-14 sm:pb-20 bg-[#FAF7F2] border-b border-[#C5A059]/20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -49,7 +63,7 @@ export const HerDayTimeline: React.FC = () => {
                   onClick={() => setActiveStep(idx)}
                   className={`p-3 sm:p-4 rounded-sm border text-left transition-all duration-300 flex flex-col items-start cursor-pointer ${
                     isActive
-                      ? 'bg-[#670A1E] text-white border-[#670A1E] shadow-lg shadow-[#670A1E]/20 ring-1 ring-[#C5A059]'
+                      ? 'bg-[#670A1E] text-white border-[#670A1E] shadow-md ring-1 ring-[#C5A059]'
                       : 'bg-[#FFFDF9] text-stone-700 border-[#C5A059]/30 hover:border-[#670A1E]'
                   }`}
                 >
@@ -57,11 +71,11 @@ export const HerDayTimeline: React.FC = () => {
                     <span className={isActive ? 'text-[#E8D3A2]' : 'text-[#C5A059]'}>
                       {getIcon(idx)}
                     </span>
-                    <span className="font-cinzel text-xs font-bold tracking-wider">
+                    <span className="font-serif text-xs font-semibold tracking-wider">
                       {item.time}
                     </span>
                   </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider line-clamp-1">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider line-clamp-1">
                     {item.title.replace('THE ', '')}
                   </span>
                 </button>
@@ -72,43 +86,47 @@ export const HerDayTimeline: React.FC = () => {
 
         {/* Dynamic Timeline Card */}
         <div className="bg-[#FFFDF9] rounded-sm border border-[#C5A059]/40 shadow-xl overflow-hidden max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 min-h-[420px]">
             
-            <div className="lg:col-span-5 relative min-h-[340px] lg:min-h-[440px] overflow-hidden bg-stone-900">
+            {/* Visual Photo Column */}
+            <div className="md:col-span-5 relative min-h-[340px] md:min-h-full overflow-hidden bg-stone-900">
               <img
-                src={currentSlot.image}
+                src={timelineImages[activeStep] || currentSlot.image}
                 alt={currentSlot.title}
-                className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <div className="text-[11px] font-cinzel font-bold text-[#E8D3A2] tracking-widest uppercase">
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="text-[10px] font-bold text-[#E8D3A2] tracking-widest uppercase block mb-0.5">
                   TIMELINE SNAPSHOT
-                </div>
-                <div className="font-royal text-2xl font-bold mt-0.5">
+                </span>
+                <p className="font-serif text-lg sm:text-xl font-normal text-white">
                   {currentSlot.time} — {currentSlot.sareeLook}
-                </div>
+                </p>
               </div>
             </div>
 
-            <div className="lg:col-span-7 p-6 sm:p-10 space-y-6">
-              <div className="flex items-center gap-3">
-                <span className="px-3 py-1 bg-[#670A1E]/10 text-[#670A1E] font-cinzel font-bold text-xs rounded-sm border border-[#670A1E]/20">
-                  {currentSlot.time}
-                </span>
-                <span className="text-xs font-semibold uppercase tracking-widest text-stone-500">
-                  {currentSlot.context}
-                </span>
+            {/* Details Column */}
+            <div className="md:col-span-7 p-6 sm:p-9 lg:p-10 flex flex-col justify-between space-y-6">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="px-3 py-1 bg-[#670A1E]/10 text-[#670A1E] font-serif font-bold text-xs rounded-sm border border-[#670A1E]/20">
+                    {currentSlot.time}
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wider text-stone-500">
+                    {currentSlot.context}
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#4A0614] mb-3">
+                  {currentSlot.title}
+                </h3>
+
+                <p className="text-stone-600 text-xs sm:text-sm leading-relaxed font-normal">
+                  {currentSlot.description}
+                </p>
               </div>
-
-              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-[#4A0614]">
-                {currentSlot.title}
-              </h3>
-
-              <p className="text-stone-700 text-sm sm:text-base leading-relaxed font-light">
-                {currentSlot.description}
-              </p>
 
               <div className="pt-4 border-t border-[#C5A059]/25 flex flex-wrap items-center gap-4 text-xs text-stone-600">
                 <div className="flex items-center gap-1.5">

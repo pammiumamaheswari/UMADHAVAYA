@@ -8,39 +8,41 @@ export const DayNightExperience: React.FC = () => {
   const [activeMode, setActiveMode] = useState<'day' | 'night'>('day');
 
   const saree: SareeProduct = INITIAL_SAREES[selectedSareeIndex] || INITIAL_SAREES[0];
-  const currentEdit = activeMode === 'day' ? saree.dayNightEdit.day : saree.dayNightEdit.night;
+  const dayEdit = saree.dayNightEdit.day;
+  const nightEdit = saree.dayNightEdit.night;
+  const currentEdit = activeMode === 'day' ? dayEdit : nightEdit;
 
   return (
-    <section id="day-night-section" className="py-20 sm:py-28 bg-[#FFFDF9] border-y border-[#C5A059]/20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="day-night-section"
+      className="pt-10 pb-16 sm:pt-14 sm:pb-20 bg-[#FFFDF9] border-b border-[#C5A059]/20 relative overflow-hidden"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <span className="text-[11px] font-medium tracking-[0.3em] text-[#C5A059] uppercase block mb-2">
-            The Versatility Demonstration
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <span className="text-[10px] sm:text-xs font-bold tracking-[0.3em] text-[#C5A059] uppercase block mb-2">
+            THE VERSATILITY DEMONSTRATION
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#4A0614] mb-3">
-            One Saree. Two Worlds.
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#4A0614] mb-2">
+            One Saree. <span className="text-[#C5A059] italic">Two Worlds.</span>
           </h2>
-          <p className="font-serif text-xl sm:text-2xl text-stone-700 italic max-w-xl mx-auto mb-3 font-light">
+          <p className="font-serif text-base sm:text-lg text-stone-700 italic max-w-xl mx-auto font-light">
             “The same heirloom. Re-imagined from morning meetings to evening celebrations.”
           </p>
-          <div className="w-12 h-0.5 bg-[#C5A059] mx-auto mt-3 mb-4 opacity-80" />
-          <p className="text-xs text-stone-500 font-normal tracking-wide">
-            Switch between Day and Night to see how the styling, jewellery, and lighting transform:
-          </p>
+          <div className="w-12 h-0.5 bg-[#C5A059] mx-auto mt-3 opacity-80" />
         </div>
 
-        {/* Saree Picker Mini-Tabs */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-8 no-scrollbar">
+        {/* Unified Control Header: Saree Selection Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto mb-8 px-2">
           {INITIAL_SAREES.slice(0, 4).map((s, idx) => (
             <button
               key={s.id}
               onClick={() => setSelectedSareeIndex(idx)}
-              className={`px-4 py-2 text-xs font-cinzel font-bold tracking-wider rounded-sm transition-all border whitespace-nowrap cursor-pointer ${
+              className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer ${
                 selectedSareeIndex === idx
-                  ? 'bg-[#4A0614] text-[#FAF7F2] border-[#C5A059] shadow-sm'
-                  : 'bg-white text-stone-700 border-stone-200 hover:border-[#C5A059]'
+                  ? 'bg-[#670A1E] text-white border border-[#670A1E] shadow-sm'
+                  : 'bg-[#FAF7F2] text-stone-700 border border-[#C5A059]/30 hover:border-[#670A1E] hover:text-[#670A1E]'
               }`}
             >
               {s.storyName}
@@ -48,135 +50,178 @@ export const DayNightExperience: React.FC = () => {
           ))}
         </div>
 
-        {/* Master Day / Night Interactive Switcher */}
-        <div className="flex items-center justify-center mb-10">
-          <div className="inline-flex p-1.5 bg-[#FAF7F2] border-2 border-[#C5A059]/40 rounded-full shadow-inner">
-            <button
-              onClick={() => setActiveMode('day')}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
-                activeMode === 'day'
-                  ? 'bg-amber-100 text-amber-950 shadow-md ring-1 ring-amber-400'
-                  : 'text-stone-600 hover:text-stone-900'
-              }`}
-            >
-              <Sun className={`w-4 h-4 ${activeMode === 'day' ? 'text-amber-600' : 'text-stone-400'}`} />
-              <span>☀ DAY EDIT</span>
-            </button>
+        {/* Master Card with Integrated Day/Night Switcher */}
+        <div
+          className={`rounded-sm border transition-all duration-500 overflow-hidden shadow-xl ${
+            activeMode === 'day'
+              ? 'bg-[#FAF7F2] border-[#C5A059]/40 text-stone-900'
+              : 'bg-[#180A0E] border-[#C5A059]/50 text-[#FAF7F2]'
+          }`}
+        >
+          {/* Top Mode Bar */}
+          <div
+            className={`p-4 px-6 sm:px-8 border-b flex flex-col sm:flex-row items-center justify-between gap-4 ${
+              activeMode === 'day'
+                ? 'bg-amber-50/70 border-[#C5A059]/20'
+                : 'bg-[#220B12] border-[#C5A059]/30'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold tracking-widest uppercase text-[#C5A059]">
+                {saree.storyName}
+              </span>
+              <span className="text-stone-400 hidden sm:inline">&bull;</span>
+              <span className="text-xs opacity-80 font-serif italic hidden sm:inline">
+                {saree.category.name}
+              </span>
+            </div>
 
-            <button
-              onClick={() => setActiveMode('night')}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
-                activeMode === 'night'
-                  ? 'bg-[#30030C] text-[#FAF7F2] shadow-md ring-1 ring-[#C5A059]'
-                  : 'text-stone-600 hover:text-stone-900'
-              }`}
-            >
-              <Moon className={`w-4 h-4 ${activeMode === 'night' ? 'text-[#E8D3A2]' : 'text-stone-400'}`} />
-              <span>🌙 NIGHT EDIT</span>
-            </button>
+            {/* Toggle Buttons */}
+            <div className="flex items-center p-1 rounded-full bg-black/10 dark:bg-black/40 border border-[#C5A059]/30">
+              <button
+                onClick={() => setActiveMode('day')}
+                className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                  activeMode === 'day'
+                    ? 'bg-amber-400 text-stone-950 shadow-xs'
+                    : 'text-stone-500 hover:text-stone-800 dark:hover:text-stone-200'
+                }`}
+              >
+                <Sun className="w-3.5 h-3.5" />
+                <span>Day Edit</span>
+              </button>
+
+              <button
+                onClick={() => setActiveMode('night')}
+                className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                  activeMode === 'night'
+                    ? 'bg-[#670A1E] text-white shadow-xs'
+                    : 'text-stone-500 hover:text-stone-800 dark:hover:text-stone-200'
+                }`}
+              >
+                <Moon className="w-3.5 h-3.5" />
+                <span>Night Edit</span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Interactive Visual Display */}
-        <div className={`rounded-sm border transition-all duration-700 overflow-hidden shadow-2xl max-w-5xl mx-auto ${
-          activeMode === 'day'
-            ? 'bg-[#FAF7F2] border-amber-200 text-stone-900'
-            : 'bg-[#15070B] border-[#C5A059]/40 text-[#FAF7F2]'
-        }`}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          {/* Card Body Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 min-h-[440px]">
             
-            {/* Visual Photo */}
-            <div className="lg:col-span-6 relative min-h-[420px] lg:min-h-[540px] overflow-hidden">
+            {/* Visual Photo Column */}
+            <div className="md:col-span-5 relative min-h-[320px] md:min-h-full overflow-hidden bg-stone-900">
               <img
                 src={currentEdit.image}
                 alt={`${saree.storyName} ${activeMode === 'day' ? 'Day Edit' : 'Night Edit'}`}
-                className={`w-full h-full object-cover transition-all duration-700 scale-100 hover:scale-105 ${
+                className={`w-full h-full object-cover transition-all duration-700 ${
                   activeMode === 'day'
                     ? 'contrast-[1.02] brightness-100'
-                    : 'contrast-[1.18] brightness-[0.88] saturate-[1.12]'
+                    : 'contrast-[1.12] brightness-[0.9] saturate-[1.1]'
                 }`}
               />
-              {/* Context Lighting Badge */}
-              <div className="absolute top-6 left-6 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${activeMode === 'day' ? 'bg-amber-400' : 'bg-indigo-400'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+
+              {/* Lighting Badge */}
+              <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold flex items-center gap-1.5">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    activeMode === 'day' ? 'bg-amber-400' : 'bg-indigo-400'
+                  }`}
+                />
                 <span>{currentEdit.lighting}</span>
               </div>
 
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded bg-black/60 backdrop-blur-md border border-white/15 text-white">
-                <div className="text-[11px] tracking-widest text-[#E8D3A2] uppercase font-bold">
-                  {activeMode === 'day' ? 'THE WORKDAY / DAYTIME DRAPE' : 'THE GALA / CELEBRATION DRAPE'}
-                </div>
-                <div className="font-royal text-xl font-medium mt-1">
+              {/* Bottom Photo Title */}
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <span className="text-[10px] tracking-widest text-[#E8D3A2] uppercase font-bold block mb-0.5">
+                  {activeMode === 'day' ? 'DAYTIME STYLING' : 'NOCTURNE GALA STYLING'}
+                </span>
+                <p className="font-serif text-base font-normal leading-tight text-white">
                   {currentEdit.title}
-                </div>
+                </p>
               </div>
             </div>
 
-            {/* Styling Breakdown */}
-            <div className="lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-between space-y-6">
+            {/* Styling Breakdown Details */}
+            <div className="md:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between pb-4 border-b border-[#C5A059]/30 mb-6">
-                  <div>
-                    <span className="text-[11px] font-cinzel font-bold text-[#C5A059] tracking-widest uppercase">
-                      STYLING CURATION
-                    </span>
-                    <h3 className="font-cinzel text-2xl sm:text-3xl font-bold mt-1">
-                      {saree.storyName}
-                    </h3>
-                  </div>
-                  <span className="text-xs px-3 py-1 rounded bg-[#C5A059]/20 text-[#C5A059] font-bold uppercase tracking-wider">
-                    {activeMode === 'day' ? 'Daylight Palette' : 'Nocturne Splendor'}
+                <div className="flex items-center justify-between pb-3 border-b border-[#C5A059]/25 mb-4">
+                  <span className="text-[10px] font-bold tracking-[0.25em] text-[#C5A059] uppercase">
+                    {activeMode === 'day' ? 'MORNING / WORKDAY EDIT' : 'EVENING / GALA EDIT'}
+                  </span>
+                  <span
+                    className={`text-[10px] px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider ${
+                      activeMode === 'day'
+                        ? 'bg-amber-200/60 text-amber-950'
+                        : 'bg-[#670A1E] text-white'
+                    }`}
+                  >
+                    {activeMode === 'day' ? '8:30 AM — 5:00 PM' : '6:00 PM — MIDNIGHT'}
                   </span>
                 </div>
 
-                <p className="text-sm sm:text-base leading-relaxed opacity-90 font-light mb-8">
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal mb-2 text-[#4A0614] dark:text-amber-100">
+                  {currentEdit.title}
+                </h3>
+
+                <p className="text-xs sm:text-sm leading-relaxed opacity-90 font-normal mb-6">
                   {currentEdit.description}
                 </p>
 
-                {/* Micro-Details Grid */}
-                <div className="space-y-4">
-                  <div className="p-3.5 rounded-sm border border-[#C5A059]/25 bg-black/5 dark:bg-white/5 flex items-start gap-3">
-                    <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider w-24 flex-shrink-0">
-                      Jewellery:
+                {/* 4-Cell Styling Breakdown */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6">
+                  <div className="p-3 rounded-sm border border-[#C5A059]/20 bg-black/[0.02] dark:bg-white/[0.04]">
+                    <span className="text-[10px] font-bold text-[#C5A059] uppercase tracking-wider block mb-0.5">
+                      Jewellery
                     </span>
-                    <span className="text-xs opacity-90">{currentEdit.jewellery}</span>
+                    <span className="text-xs opacity-90 leading-tight block">
+                      {currentEdit.jewellery}
+                    </span>
                   </div>
 
-                  <div className="p-3.5 rounded-sm border border-[#C5A059]/25 bg-black/5 dark:bg-white/5 flex items-start gap-3">
-                    <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider w-24 flex-shrink-0">
-                      Drape Style:
+                  <div className="p-3 rounded-sm border border-[#C5A059]/20 bg-black/[0.02] dark:bg-white/[0.04]">
+                    <span className="text-[10px] font-bold text-[#C5A059] uppercase tracking-wider block mb-0.5">
+                      Drape Style
                     </span>
-                    <span className="text-xs opacity-90">{currentEdit.drapeStyle}</span>
+                    <span className="text-xs opacity-90 leading-tight block">
+                      {currentEdit.drapeStyle}
+                    </span>
                   </div>
 
-                  <div className="p-3.5 rounded-sm border border-[#C5A059]/25 bg-black/5 dark:bg-white/5 flex items-start gap-3">
-                    <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider w-24 flex-shrink-0">
-                      Footwear:
+                  <div className="p-3 rounded-sm border border-[#C5A059]/20 bg-black/[0.02] dark:bg-white/[0.04]">
+                    <span className="text-[10px] font-bold text-[#C5A059] uppercase tracking-wider block mb-0.5">
+                      Footwear
                     </span>
-                    <span className="text-xs opacity-90">{currentEdit.footwear}</span>
+                    <span className="text-xs opacity-90 leading-tight block">
+                      {currentEdit.footwear}
+                    </span>
                   </div>
 
-                  <div className="p-3.5 rounded-sm border border-[#C5A059]/25 bg-black/5 dark:bg-white/5 flex items-start gap-3">
-                    <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider w-24 flex-shrink-0">
-                      Environment:
+                  <div className="p-3 rounded-sm border border-[#C5A059]/20 bg-black/[0.02] dark:bg-white/[0.04]">
+                    <span className="text-[10px] font-bold text-[#C5A059] uppercase tracking-wider block mb-0.5">
+                      Setting
                     </span>
-                    <span className="text-xs opacity-90">{currentEdit.setting}</span>
+                    <span className="text-xs opacity-90 leading-tight block">
+                      {currentEdit.setting}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* View Saree Detail Link */}
-              <div className="pt-6 border-t border-[#C5A059]/30 flex items-center justify-between">
+              {/* Bottom Action Row */}
+              <div className="pt-4 border-t border-[#C5A059]/20 flex items-center justify-between gap-4">
                 <div>
-                  <span className="text-[11px] opacity-70 block">Silk & Weave Origin:</span>
-                  <span className="text-xs font-bold">{saree.origin}</span>
+                  <span className="text-[10px] opacity-70 block uppercase">Pure Silk Origin</span>
+                  <span className="text-xs font-semibold text-[#670A1E] dark:text-[#E8D3A2]">
+                    {saree.origin}
+                  </span>
                 </div>
+
                 <Link
                   to={`/products/${saree.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C5A059] hover:bg-[#D4AF37] text-stone-950 text-xs font-bold tracking-widest uppercase rounded-sm transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 px-5 py-2 bg-[#670A1E] hover:bg-[#4A0614] text-white text-xs font-medium tracking-wider uppercase rounded-sm transition-colors shadow-xs cursor-pointer"
                 >
-                  <span>View This Saree</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Explore Saree</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 

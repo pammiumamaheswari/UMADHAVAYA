@@ -45,7 +45,7 @@ export const FindYourSareeSection: React.FC = () => {
   const matchedSaree = getRecommendation();
 
   return (
-    <section id="find-your-saree" className="py-20 sm:py-28 bg-[#30030C] text-[#FAF7F2] relative overflow-hidden">
+    <section id="find-your-saree" className="py-12 sm:py-16 bg-[#30030C] text-[#FAF7F2] relative overflow-hidden">
       
       {/* Background Decorative Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:28px_28px]" />
@@ -53,7 +53,7 @@ export const FindYourSareeSection: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-12">
+        <div className="text-center mb-8 sm:mb-10">
           <span className="text-[11px] font-medium tracking-[0.3em] text-[#E8D3A2] uppercase block mb-2">
             Interactive Curation
           </span>

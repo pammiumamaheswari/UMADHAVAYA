@@ -6,21 +6,21 @@ export const UmadhvayaJournal: React.FC = () => {
   const [activeArticle, setActiveArticle] = useState<typeof JOURNAL_ARTICLES[0] | null>(null);
 
   return (
-    <section id="journal-section" className="py-20 sm:py-28 bg-[#FAF7F2] border-b border-[#C5A059]/20 relative">
+    <section id="journal-section" className="py-12 sm:py-16 bg-[#FAF7F2] border-b border-[#C5A059]/20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[11px] font-medium tracking-[0.3em] text-[#C5A059] uppercase block mb-2">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="text-[10px] sm:text-xs font-bold tracking-[0.3em] text-[#C5A059] uppercase block mb-2">
             Editorial Chronicles
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#4A0614] mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#4A0614] mb-3">
             The UMADHVAYA Journal
           </h2>
-          <p className="font-serif text-xl sm:text-2xl text-stone-700 italic max-w-xl mx-auto font-light">
+          <p className="font-serif text-base sm:text-lg text-stone-700 italic max-w-xl mx-auto font-light">
             “Essays on textile metallurgy, handloom anthropology, and the art of modern draping.”
           </p>
-          <div className="w-12 h-0.5 bg-[#C5A059] mx-auto mt-4 opacity-80" />
+          <div className="w-12 h-0.5 bg-[#C5A059] mx-auto mt-3 opacity-80" />
         </div>
 
         {/* Journal Cards Grid */}
